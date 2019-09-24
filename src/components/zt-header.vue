@@ -8,56 +8,27 @@
     <!-- logo -->
     <div class="logo-box flex_lc">
       <img class="icon" :src="logo"/>
-      <span class="logo-name">圣泽捷通智慧整车物流系统</span>
     </div>
     <div class="person-info flex_cc">
       <el-dropdown @command="handleCommand">
         <div class="el-dropdown-link">
-          <img :src="userInfo.avatar || userIcon" alt="">
+          <img :src="userIcon" alt="">
           <span style="color: #fff;font-size: 12px">
-            {{userInfo.name || '--'}}<i class="el-icon-caret-bottom el-icon--right"></i>
+            <i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
         </div>
           <el-dropdown-menu class="dropsty" slot="dropdown" style="min-width: 100px">
-            <!--<el-dropdown-item command="userCenter">个人中心</el-dropdown-item>
-            <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>-->
-            <el-dropdown-item command="loginOut">退出登录</el-dropdown-item>
+            <el-dropdown-item command="userCenter">Profile</el-dropdown-item>
+            <el-dropdown-item command="loginOut">Sign Out</el-dropdown-item>
           </el-dropdown-menu>
       </el-dropdown>
     </div>
-
-    <!--修改密码弹窗-->
-    <el-dialog title="修改密码" :visible.sync="visible" width="580px" @closed="closeDialog">
-      <el-form label-width="120px" :model="form" ref="form" :rules="rules">
-        <el-form-item label="手机号码：">
-          {{userInfo.account || '--'}}
-        </el-form-item>
-        <el-form-item label="短信验证码：" prop="verifyCode">
-          <el-input placeholder="请输入短信验证码" v-model="form.verifyCode" maxlength="6">
-            <el-button slot="append" @click="getCode" :disabled="isGet">{{codeText}}</el-button>
-          </el-input>
-        </el-form-item>
-        <el-form-item label="新密码：" prop="password">
-          <el-input placeholder="数字和字母组合，6-20位字符" maxlength="20" type="password" v-model="form.password"></el-input>
-        </el-form-item>
-        <el-form-item label="确认密码：" prop="confirmPassword">
-          <el-input placeholder="再次输入确认" type="password" v-model="form.confirmPassword" maxlength="20"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer">
-        <el-button size="small" @click="visible=false">取消</el-button>
-        <el-button size="small" type="primary" @click="handleSubmit" :loading="loading">提交</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-  import ztLogo from "./../assets/images/sts.png";
-  import userIcon from "./../assets/images/user.png";
-  import Cookie from "js-cookie";
-  import md5 from 'js-md5';
-  import {passwordReg} from "../utils";
+  import ztLogo from "@/assets/images/logo.jpg";
+  import userIcon from "@/assets/images/head.jpg";
 
   export default {
     components:{

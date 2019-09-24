@@ -1,37 +1,17 @@
 <template>
-  <div style="height: 100%" v-cloak @mouseover="hasOperation" @mousedown="hasOperation" @keydown="hasOperation">
-    <div class="sysframe-box" v-if="!showMenu">
-      <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
-    </div>
-    <div class="sysframe-box" v-else>
+  <div style="height: 100%" >
+    <div class="sysframe-box">
       <!-- 头部组建 -->
       <zt-header></zt-header>
-      <!-- 导航组件 -->
-      <!-- <frameNav :navData="navData" :currentNav ="currentNav"></frameNav> -->
       <!-- 大内容区 -->
       <div class="sysframe-content flex_lt">
         <subNav @subNavOpenFun="getSubNavOpen"></subNav>
         <!-- 内容区 -->
         <div class="sysframe-con" :class="{'sysframe-open':!sysframeOpen}">
-          <!-- 历史记录 -->
-          <tagsView v-if="showTabsView" :tagActiveName="tagActiveName"></tagsView>
 
           <div class="page-content webkit-scrollbar">
-            <keep-alive :include="includeList">
               <router-view></router-view>
-            </keep-alive>
-            <!--<div class="push"></div>&lt;!&ndash;push在此为footer占位，高度和footer的一样&ndash;&gt;-->
           </div>
-          <!--<div class="page-footer">
-            <p>copyright © 2019 众云物流</p>
-            <p>
-              <span class="btn-item">帮助</span>
-              <span class="btn-item">隐私</span>
-              <span class="btn-item">条款</span>
-            </p>
-          </div>-->
         </div>
       </div>
     </div>
@@ -40,10 +20,7 @@
 
 <script>
   import ztHeader from './components/zt-header.vue';
-  import frameNav from './components/zt-frame-nav';
   import subNav from './components/zt-sub-nav';
-  import Cookie from 'js-cookie';
-  import tagsView from './components/tagsView';
 
   export default {
     data() {
@@ -56,54 +33,19 @@
       };
     },
     computed: {
-      showMenu() {
-        // 登录、注册、忘记密码、404页面不显示头部和菜单栏
-        return this.$route.name !== 'login' && this.$route.name !== 'resetPassword' && this.$route.name !== 'register' && this.$route.name !== 'error';
-      },
-      showTabsView() {
-        return this.showMenu && this.$route.name !== 'welcome';
-      },
-      includeList() {
-        return this.$store.getters.getCacheList.map(item => item.name).join(',')
-      }
+      
     },
     watch: {
-      $route(val,old) {
-        if (this.showMenu && this.$route.name !== 'welcome' && !this.$route.meta.hiddenTag) {
-          this.$store.commit('ADD_TAG_VIEW',val);
-          this.tagActiveName = val.name;
-        }
-      }
+      
     },
     methods:{
       getSubNavOpen(data){
         this.sysframeOpen = !data;
       },
-      hasOperation() {
-        if (!this.showMenu) { //如果不是需要登录的页面，即不做判断
-          this.lTime = new Date().getTime();
-          return false;
-        }
-        this.cTime = new Date().getTime(); // 记录当前操作的时间
-        if (this.cTime - this.lTime > this.tOut) { //如果超时了，就退出
-          // 清除缓存数据
-          Cookie.remove("vlsCompanyToken",{domain:""});
-          localStorage.removeItem('data');
-          this.$store.commit('CLEAR_USER_INFO');
-          this.lTime = new Date().getTime(); //如果已经超时了，重置最后一次操作时间
-          window.alert('页面超时，请重新登录');
-          location.href = '/#/login';
-          location.reload(); //刷新页面，重新实例化router，防止路由重复
-        } else { // 如果没有超时，就把当前时间记录为最后一次操作的时间
-          this.lTime = new Date().getTime();
-        }
-      },
     },
     components:{
       ztHeader,
-      frameNav,
-      subNav,
-      tagsView
+      subNav
     }
   }
 </script>
