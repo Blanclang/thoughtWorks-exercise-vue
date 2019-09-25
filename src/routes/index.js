@@ -2,7 +2,7 @@
 export let initRoutes = [
   {
     path: '/',
-    name: 'home',
+    name: 'index',
     redirect: {
       name: 'home'
     }

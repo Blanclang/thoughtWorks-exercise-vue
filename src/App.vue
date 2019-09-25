@@ -80,7 +80,7 @@
           height:calc(100% - 35px);
           overflow: hidden;
           overflow-y: auto;
-          background: #ffffff;
+          /*background: #ffffff;*/
         }
         .page-footer {
           position: relative;

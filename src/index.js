@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import ElementUI from "element-ui";
-import route from './routes';
+import {initRoutes} from './routes';
 import store from './store'
 // import './assets/css/elementui.css';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -22,7 +22,7 @@ Vue.prototype.formatDate = formatDate;
 
 //实例化路由
 const router = new VueRouter({
-  routes: route
+  routes: initRoutes
 });
 
 //实例化Vue
