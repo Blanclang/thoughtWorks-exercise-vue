@@ -6,16 +6,18 @@
 
 <template>
   <div class="home">
-    <div class="top">
-      <div class="top-item">
+    <div class="top-wrap">
+      <div class="top-item building">
+        <i class="iconfont iconshezhi1 building"></i>
         <span class="left-text">Building</span>
         <span class="right-text">3</span>
       </div>
-      <div class="top-item">
+      <div class="top-item idle">
+        <i class="iconfont iconbeizi idle"></i>
         <span class="left-text">Idle</span>
         <span class="right-text">3</span>
       </div>
-      <div class="top-item">
+      <div class="top-item count">
         <div class="flex-item">
           <span>ALL</span>
           <span>8</span>
@@ -113,44 +115,14 @@
 
 <style scoped lang="scss">
   .home {
-    max-width: 900px;
+    border:2px solid green;
+    padding: 10px 16px;
   }
-  .top {
-    display: flex;
-    justify-content: space-between;
+  .top-wrap {
+    display: grid;
     .top-item {
-      flex: 1;
-      height: 100px;
+      position: relative;
       padding: 0 10px;
-      &+.top-item {
-        margin-left: 30px;
-      }
-      &:nth-child(1) {
-        background-color: #ff9a2a;
-      }
-      &:nth-child(2) {
-        background-color: #7fbc39;
-      }
-      &:nth-child(3) {
-        background-color: #ffffff;
-        display: flex;
-        justify-content: space-between;
-        .flex-item {
-          flex: 1;
-          span {
-            display: block;
-            text-align: center;
-            line-height: 50px;
-            &:first-child {
-              font-size: 12px;
-            }
-            &:last-child {
-              font-size: 20px;
-              font-weight: bold;
-            }
-          }
-        }
-      }
       .left-text {
         line-height: 40px;
         font-size: 18px;
@@ -165,6 +137,37 @@
         display: block;
         text-align: right;
         padding-right: 10px;
+      }
+      .iconfont{
+        position:absolute;
+        top: -16px;
+        left: 25%;
+        opacity: 0.2;
+        color: #ffffff;
+      }
+      .iconfont.building{
+        font-size:120px;
+      }
+      .iconfont.idle{
+        font-size:130px;
+      }
+    }
+    .top-item.building {
+      background-color: #ff9a2a;
+    }
+    .top-item.idle {
+      background-color: #7fbc39;
+    }
+    .top-item.count{
+      background-color: #fff;
+      display: grid;
+    }
+    .flex-item span{
+      &:first-child {
+        font-size: 13px;
+      }
+      &:last-child {
+        font-weight: bold;
       }
     }
   }
@@ -231,12 +234,29 @@
           background-color: rgb(255,154,42);
           color: #ffffff;
         }
+        .text-item {
+          display: inline-block;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
       }
-      .text-item {
-        display: inline-block;
-        margin-right: 10px;
-        vertical-align: middle;
+      .bottom {
+        .add-btn{
+          background-color:#00b4cf;
+          color: #ffffff;
+          padding:1px 4px; 
+          i{
+            font-size: 12px;
+            font-weight: bold;
+          }
+        }
+        .tag {
+          padding: 2px 8px;
+          background-color:#efefef;
+          margin-left:6px; 
+        }
       }
+      
     }
   }
   

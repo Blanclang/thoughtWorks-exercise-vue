@@ -1,18 +1,12 @@
 <template>
-  <div style="height: 100%" >
-    <div class="sysframe-box">
-      <!-- 头部组建 -->
-      <zt-header></zt-header>
-      <!-- 大内容区 -->
-      <div class="sysframe-content flex_lt">
-        <subNav @subNavOpenFun="getSubNavOpen"></subNav>
-        <!-- 内容区 -->
-        <div class="sysframe-con" :class="{'sysframe-open':!sysframeOpen}">
-
-          <div class="page-content webkit-scrollbar">
-              <router-view></router-view>
-          </div>
-        </div>
+  <div class="container">
+    <!-- 头部组建 -->
+    <zt-header></zt-header>
+    <div class="wrap">
+      <!-- 导航 -->
+      <subNav></subNav>
+      <div class="content">
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -25,11 +19,7 @@
   export default {
     data() {
       return {
-        lTime: new Date().getTime(), // 最后一次操作的时间
-        cTime: new Date().getTime(), // 当前操作的时间
-        tOut: 1000 * 60 * 60 * 4,   //超时时间4小时
         sysframeOpen:false,
-        tagActiveName: '' //当前高亮的页签名
       };
     },
     computed: {
@@ -39,7 +29,7 @@
       
     },
     methods:{
-      getSubNavOpen(data){
+      getSubNavOpen(){
         this.sysframeOpen = !data;
       },
     },
@@ -52,6 +42,26 @@
 
 <style lang="scss">
   @import "./assets/css/common.css";
+  .container{
+    width: 100%;
+    border:1px solid red;
+    display:grid;
+    grid-auto-rows: 1fr min-content;
+    .wrap{
+      margin: 0 auto;
+      display: grid;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   //引入通用样式
   .sysframe-box{
     width: 100%;
@@ -116,18 +126,6 @@
       .sysframe-con.sysframe-open{
         width: calc(100% - 54px);
         transition:all 0.6s;
-      }
-    }
-  }
-  .button__box{padding: 20px 10px 0;}
-  .search__box{
-    position: relative;
-    .search__form{
-      .search__input--text{
-        width: 300px;
-      }
-      .el-form-item{
-        margin-bottom: 0;
       }
     }
   }
