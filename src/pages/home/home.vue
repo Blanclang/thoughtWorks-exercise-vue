@@ -33,57 +33,161 @@
       </div>
     </div>
 
-    <div class="menu-box">
-      <div class="tab-box">
+    <!-- 小于768搜索 -->
+    <div class="search-wrap__lit flex_cc">
+      <el-input class="search" prefix-icon="el-icon-search"></el-input>
+    </div>
+
+    <div class="menu-wrap flex_cc">
+      <div class="tab-nav">
         <div class="tab-item active">All</div>
         <div class="tab-item">Physical</div>
         <div class="tab-item">Virtual</div>
       </div>
-      <div class="search-box">
-        <el-input prefix-icon="el-icon-search" style="width: 200px;"></el-input>
+      <div class="search-wrap flex_cc">
+        <el-input class="search" prefix-icon="el-icon-search"></el-input>
       </div>
-      <div class="btn-box">
+      <div class="btn-wrap flex_rc">
         <span class="el-icon-s-grid active"></span>
         <span class="el-icon-s-fold"></span>
       </div>
     </div>
 
-    <div class="list-content">
+    <div class="list-wrap">
       <div class="list-item">
-        <div class="img-box">
+        <div class="list-img">
           <img :src="win" alt="">
         </div>
-        <div class="data-box">
-          <div class="top">
-            <div class="status-box">
+        <div class="list-data">
+          <div class="list-top">
+            <div class="network-box flex_lc">
               <i class="el-icon-monitor text-item"></i>
-              <span class="text-item" style="color: #00b4cf;font-weight: bold">www.asdsad.com</span>
-              <span class="tag text-item">building</span>
+              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
             </div>
-            <div class="file-address">
+            <div class="status-box">
+              <span class="text-item">building</span>
+            </div>
+            <div class="ip-box flex_lc">
               <i class="el-icon-warning-outline text-item"></i>
               <span class="text-item">192.168.1.243</span>
+            </div>
+            <div class="file-box flex_lc">
               <i class="el-icon-folder text-item"></i>
               <span class="text-item">/var/lib/cruise-agent</span>
             </div>
           </div>
-          <div class="bottom">
+          <div class="list-bottom">
             <span class="add-btn">
               <i class="el-icon-plus"></i>
             </span>
-            <span class="tag">
-              Firefox<span class="el-icon-delete-solid"></span>
-            </span>
-            <span class="tag">
-              Safari<span class="el-icon-delete-solid"></span>
-            </span>
-            <span class="tag">
-              Chrome<span class="el-icon-delete-solid"></span>
-            </span>
+            <div class="browser-wrap">
+              <span class="browser-tag">
+                Firefox<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Safari<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Ubuntu<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Chrome<i class="el-icon-delete-solid"></i>
+              </span>
+            </div>
           </div>
         </div>
+        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
+      </div>
+      <div class="list-item">
+        <div class="list-img">
+          <img :src="win" alt="">
+        </div>
+        <div class="list-data">
+          <div class="list-top">
+            <div class="network-box flex_lc">
+              <i class="el-icon-monitor text-item"></i>
+              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
+            </div>
+            <div class="status-box">
+              <span class="text-item">building</span>
+            </div>
+            <div class="ip-box flex_lc">
+              <i class="el-icon-warning-outline text-item"></i>
+              <span class="text-item">192.168.1.243</span>
+            </div>
+            <div class="file-box flex_lc">
+              <i class="el-icon-folder text-item"></i>
+              <span class="text-item">/var/lib/cruise-agent</span>
+            </div>
+          </div>
+          <div class="list-bottom">
+            <span class="add-btn">
+              <i class="el-icon-plus"></i>
+            </span>
+            <div class="browser-wrap">
+              <span class="browser-tag">
+                Firefox<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Safari<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Ubuntu<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Chrome<i class="el-icon-delete-solid"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
+      </div>
+      <div class="list-item">
+        <div class="list-img">
+          <img :src="win" alt="">
+        </div>
+        <div class="list-data">
+          <div class="list-top">
+            <div class="network-box flex_lc">
+              <i class="el-icon-monitor text-item"></i>
+              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
+            </div>
+            <div class="status-box">
+              <span class="text-item">building</span>
+            </div>
+            <div class="ip-box flex_lc">
+              <i class="el-icon-warning-outline text-item"></i>
+              <span class="text-item">192.168.1.243</span>
+            </div>
+            <div class="file-box flex_lc">
+              <i class="el-icon-folder text-item"></i>
+              <span class="text-item">/var/lib/cruise-agent</span>
+            </div>
+          </div>
+          <div class="list-bottom">
+            <span class="add-btn">
+              <i class="el-icon-plus"></i>
+            </span>
+            <div class="browser-wrap">
+              <span class="browser-tag">
+                Firefox<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Safari<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Ubuntu<i class="el-icon-delete-solid"></i>
+              </span>
+              <span class="browser-tag">
+                Chrome<i class="el-icon-delete-solid"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -116,7 +220,6 @@
 <style scoped lang="scss">
   .home {
     border:2px solid green;
-    padding: 10px 16px;
   }
   .top-wrap {
     display: grid;
@@ -126,14 +229,14 @@
       .left-text {
         line-height: 40px;
         font-size: 18px;
-        color: #ffffff;
+        color: #fff;
         display: block;
         font-weight: bold;
       }
       .right-text {
         line-height: 60px;
         font-size: 48px;
-        color: #ffffff;
+        color: #fff;
         display: block;
         text-align: right;
         padding-right: 10px;
@@ -143,7 +246,7 @@
         top: -16px;
         left: 25%;
         opacity: 0.2;
-        color: #ffffff;
+        color: #fff;
       }
       .iconfont.building{
         font-size:120px;
@@ -171,17 +274,16 @@
       }
     }
   }
-  .menu-box {
-    background-color: #ffffff;
+  .menu-wrap {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin: 15px 0;
-    .tab-box {
+    background-color: #fff;
+    .tab-nav {
       display: flex;
-      width: 300px;
       height: 50px;
-      margin-right: 30px;
+      background-color: #fff;
       .tab-item {
         flex: 1;
         border-right: 1px solid #efefef;
@@ -193,10 +295,20 @@
         border-bottom: 3px solid #01869a;
       }
     }
-    .btn-box {
+    .search-wrap{
+      padding-left:30px;
+      height: 50px;
+      background-color: #fff;
+      .search{
+        width: 200px;
+      }
+    }
+    .btn-wrap {
       flex: 1;
+      height: 50px;
       text-align: right;
       padding-right: 20px;
+      background-color: #fff;
       span {
         font-size: 25px;
         display: inline-block;
@@ -209,54 +321,108 @@
       }
     }
   }
-  .list-item {
-    margin-bottom: 10px;
-    background-color: #ffffff;
-    padding: 15px;
-    display: flex;
-    .img-box {
-      margin-right: 30px;
-      img {
-        width: 80px;
-      }
-    }
-    .data-box {
-      flex: 1;
+  .search-wrap__lit{
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #fff;
+  }
+
+  .list-wrap{
+    border:1px solid red;
+    .list-item {
+      margin-bottom: 10px;
+      background-color: #fff;
+      padding: 15px 12px 15px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .top {
-        i {
-          font-size: 18px;
-        }
-        .tag {
-          padding: 2px 8px;
-          background-color: rgb(255,154,42);
-          color: #ffffff;
-        }
-        .text-item {
-          display: inline-block;
-          margin-right: 10px;
-          vertical-align: middle;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      .list-img {
+        margin-right: 25px;
+        img {
+          width: 60px;
         }
       }
-      .bottom {
-        .add-btn{
-          background-color:#00b4cf;
-          color: #ffffff;
-          padding:1px 4px; 
-          i{
-            font-size: 12px;
-            font-weight: bold;
+      .list-data {
+        display: flex;
+        flex-direction: column;
+        .list-top {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          .network-box{
+            margin-right: 24px;
+          }
+          .status-box{
+            margin-right: 40px;
+            span {
+              padding: 2px 8px;
+              background-color: rgb(255,154,42);
+              color: #fff;
+            }
+          }           
+          .ip-box{
+            margin-right: 24px;
+          }         
+          i {
+            font-size: 18px;
+            margin-right:8px;
+          }
+          .text-item {
+            display: inline-block;
+            vertical-align: middle;
+          }
+          .text-item.network {
+            color: #00b4cf;
+            font-weight: bold
           }
         }
-        .tag {
-          padding: 2px 8px;
-          background-color:#efefef;
-          margin-left:6px; 
+        .list-bottom {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          .add-btn{
+            background-color:#00b4cf;
+            color: #fff;
+            padding:1px 4px; 
+            margin-top: 5px;
+            i{
+              font-size: 12px;
+              font-weight: bold;
+            }
+          }
+          .browser-wrap{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            .browser-tag {
+              padding: 2px 6px;
+              background-color:#efefef;
+              margin-top: 5px;
+              margin-left:6px; 
+              i{
+                margin-left: 4px;
+              }
+            }
+          }
+          
+        }
+        
+      }
+      .list-btn{
+        position: absolute;
+        right: 18px;
+        bottom: 12px;
+        padding: 6px 14px;
+        background-color: #00b4cf;
+        color: #fff;
+        border-radius: 2px;
+        cursor: pointer;
+        i{
+          margin-right: 4px;
         }
       }
-      
     }
   }
   
