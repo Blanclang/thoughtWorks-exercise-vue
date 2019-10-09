@@ -1,11 +1,11 @@
 /*
-*  @描述：页面结构的头部组件
+*  @描述：头部组件
 *  @作者：白朗
-*  @创建时间：2019-09-27
+*  @创建时间：2019/10/6
 */
 <template>
   <div class="header">
-    <div class="open-wrap flex_cc">
+    <div class="open-wrap flex_cc" @click="openNav">
       <span class="el-icon-s-fold"></span>
     </div>
     <!-- logo -->
@@ -46,7 +46,9 @@
 
     },
     methods:{
-      
+      openNav(){
+
+      }
     }
   }
 </script>
@@ -58,9 +60,6 @@
     border-bottom: 1px solid #ccc; 
     display: grid;
     grid-template-columns: 100px auto 100px;
-
-
-
     .el-dropdown-link {
       cursor: pointer;
       span {
@@ -76,20 +75,20 @@
       }
     }
     .open-wrap{
-      border:1px solid red;
+      cursor: pointer;
       span{
         font-size:28px;
-        cursor: pointer;
       }
     }
+    .open-wrap:hover{
+      opacity: 0.7;
+    }
     .logo-wrap{
-      border:1px solid blue;
       img{
         width: 100px;
       }
     }
     .person-wrap{
-      border:1px solid red;
       
       padding-right: 18px;
       p{

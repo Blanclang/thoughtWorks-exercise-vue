@@ -6,6 +6,7 @@
 
 <template>
   <div class="home">
+    <!--上部栏 -->
     <div class="top-wrap">
       <div class="top-item building">
         <i class="iconfont iconshezhi1 building"></i>
@@ -15,18 +16,18 @@
       <div class="top-item idle">
         <i class="iconfont iconbeizi idle"></i>
         <span class="left-text">Idle</span>
-        <span class="right-text">3</span>
+        <span class="right-text">5</span>
       </div>
       <div class="top-item count">
-        <div class="flex-item">
+        <div class="count-item">
           <span>ALL</span>
           <span>8</span>
         </div>
-        <div class="flex-item">
+        <div class="count-item">
           <span>PHYSICAL</span>
           <span>4</span>
         </div>
-        <div class="flex-item">
+        <div class="count-item">
           <span>VIRTUAL</span>
           <span>8</span>
         </div>
@@ -37,12 +38,10 @@
     <div class="search-wrap__lit flex_cc">
       <el-input class="search" prefix-icon="el-icon-search"></el-input>
     </div>
-
+    <!-- tab -->
     <div class="menu-wrap flex_cc">
       <div class="tab-nav">
-        <div class="tab-item active">All</div>
-        <div class="tab-item">Physical</div>
-        <div class="tab-item">Virtual</div>
+        <div class="tab-item" :class="{'active':currentTab === item.id}" v-for="item in tabData" :key="item.id" @click="tabSelect(item.id)">{{item.name}}</div>
       </div>
       <div class="search-wrap flex_cc">
         <el-input class="search" prefix-icon="el-icon-search"></el-input>
@@ -52,28 +51,29 @@
         <span class="el-icon-s-fold"></span>
       </div>
     </div>
-
+    <!-- 列表 -->
     <div class="list-wrap">
-      <div class="list-item">
+      <div class="list-item" :class="item.status?'building':'idle'" v-for="item in listData" :key="item.id">
         <div class="list-img">
-          <img :src="win" alt="">
+          <img :src="item.image" alt="">
         </div>
         <div class="list-data">
           <div class="list-top">
             <div class="network-box flex_lc">
               <i class="el-icon-monitor text-item"></i>
-              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
+              <span class="text-item network">{{item.url}}</span>
             </div>
             <div class="status-box">
-              <span class="text-item">building</span>
+              <span v-if="item.status" class="text-item building">building</span>
+              <span v-else class="text-item idle">idle</span>
             </div>
             <div class="ip-box flex_lc">
               <i class="el-icon-warning-outline text-item"></i>
-              <span class="text-item">192.168.1.243</span>
+              <span class="text-item">{{item.ip}}</span>
             </div>
             <div class="file-box flex_lc">
               <i class="el-icon-folder text-item"></i>
-              <span class="text-item">/var/lib/cruise-agent</span>
+              <span class="text-item">{{item.file}}</span>
             </div>
           </div>
           <div class="list-bottom">
@@ -81,178 +81,170 @@
               <i class="el-icon-plus"></i>
             </span>
             <div class="browser-wrap">
-              <span class="browser-tag">
-                Firefox<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Safari<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Ubuntu<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Chrome<i class="el-icon-delete-solid"></i>
+              <span class="browser-tag" v-for="(itm,index) in item.browser" :key="index">
+                {{itm}}<i class="el-icon-delete-solid"></i>
               </span>
             </div>
           </div>
         </div>
-        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
-      </div>
-      <div class="list-item">
-        <div class="list-img">
-          <img :src="win" alt="">
-        </div>
-        <div class="list-data">
-          <div class="list-top">
-            <div class="network-box flex_lc">
-              <i class="el-icon-monitor text-item"></i>
-              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
-            </div>
-            <div class="status-box">
-              <span class="text-item">building</span>
-            </div>
-            <div class="ip-box flex_lc">
-              <i class="el-icon-warning-outline text-item"></i>
-              <span class="text-item">192.168.1.243</span>
-            </div>
-            <div class="file-box flex_lc">
-              <i class="el-icon-folder text-item"></i>
-              <span class="text-item">/var/lib/cruise-agent</span>
-            </div>
-          </div>
-          <div class="list-bottom">
-            <span class="add-btn">
-              <i class="el-icon-plus"></i>
-            </span>
-            <div class="browser-wrap">
-              <span class="browser-tag">
-                Firefox<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Safari<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Ubuntu<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Chrome<i class="el-icon-delete-solid"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
-      </div>
-      <div class="list-item">
-        <div class="list-img">
-          <img :src="win" alt="">
-        </div>
-        <div class="list-data">
-          <div class="list-top">
-            <div class="network-box flex_lc">
-              <i class="el-icon-monitor text-item"></i>
-              <span class="text-item network">www.bjstdmngbgr01.thoughtworks.com</span>
-            </div>
-            <div class="status-box">
-              <span class="text-item">building</span>
-            </div>
-            <div class="ip-box flex_lc">
-              <i class="el-icon-warning-outline text-item"></i>
-              <span class="text-item">192.168.1.243</span>
-            </div>
-            <div class="file-box flex_lc">
-              <i class="el-icon-folder text-item"></i>
-              <span class="text-item">/var/lib/cruise-agent</span>
-            </div>
-          </div>
-          <div class="list-bottom">
-            <span class="add-btn">
-              <i class="el-icon-plus"></i>
-            </span>
-            <div class="browser-wrap">
-              <span class="browser-tag">
-                Firefox<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Safari<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Ubuntu<i class="el-icon-delete-solid"></i>
-              </span>
-              <span class="browser-tag">
-                Chrome<i class="el-icon-delete-solid"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
+        <div v-if="item.status" class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
       </div>
     </div>
-
+    <!-- 手机模式弹出层 -->
+    <div v-if="navPopupPhone" class="popup">
+      <nav-phone v-on:closeCall="closeCall"></nav-phone>
+    </div>
   </div>
 </template>
 
 <script>
-  import win from '../../assets/images/windows.png';
+  import navPhone from '@/components/nav-phone';
   export default {
     name: 'home',
     data() {
       return {
-        win,
-        checkResource: [], //已经勾选的资源
-        
+        navPopupPhone:true,
+        tabData:[
+          {
+            id:1,
+            name:'All'
+          },
+          {
+            id:2,
+            name:'Physical'
+          },
+          {
+            id:3,
+            name:'Virtual'
+          }
+        ],
+        currentTab:1,
+        listData: [
+          {
+            id:1,
+            status:0,
+            image:require('../../assets/images/list1.png'),
+            url:'www.bjstdmngbgr01.thoughtworks.com',
+            ip:'192.168.1.102',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          },
+          {
+            id:2,
+            status:1,
+            image:require('../../assets/images/list1.png'),
+            url:'www.bjstdmngbgr08.thoughtworks.com',
+            ip:'192.168.1.243',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          },
+          {
+            id:3,
+            status:1,
+            image:require('../../assets/images/list2.jpg'),
+            url:'www.bjstdmngbgr10.thoughtworks.com',
+            ip:'192.168.1.80',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari']
+          },
+          {
+            id:4,
+            status:1,
+            image:require('../../assets/images/list3.jpg'),
+            url:'www.bjstdmngbgr11.thoughtworks.com',
+            ip:'192.168.1.243',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          },
+          {
+            id:5,
+            status:0,
+            image:require('../../assets/images/list4.jpg'),
+            url:'www.bjstdmngbgr15.thoughtworks.com',
+            ip:'192.168.1.117',
+            file:'/var/lib/cruise-agent',
+            browser:[]
+          },
+          {
+            id:6,
+            status:1,
+            image:require('../../assets/images/list1.png'),
+            url:'www.bjstdmngbgr01.thoughtworks.com',
+            ip:'192.168.1.110',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          },
+          {
+            id:7,
+            status:0,
+            image:require('../../assets/images/list1.png'),
+            url:'www.bjstdmngbgr01.thoughtworks.com',
+            ip:'192.168.1.110',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          },
+          {
+            id:8,
+            status:0,
+            image:require('../../assets/images/list1.png'),
+            url:'www.bjstdmngbgr01.thoughtworks.com',
+            ip:'192.168.1.110',
+            file:'/var/lib/cruise-agent',
+            browser:['Firefox','Safari','Ubuntu','Chrome']
+          }
+        ],
       }
     },
     created() {
       
     },
-    computed: {
-      
-    },
     methods: {
-      handleSubmit() {
-        
+      //tab切换
+      tabSelect(id){
+        this.currentTab = id;
+      },
+      closeCall(value){
+        console.log(value);
+        this.navPopupPhone = false;
       }
       
+    },
+    components:{
+      navPhone
     }
   }
 </script>
 
 <style scoped lang="scss">
   .home {
-    border:2px solid green;
   }
   .top-wrap {
     display: grid;
     .top-item {
       position: relative;
       padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .left-text {
-        line-height: 40px;
+        position: absolute;
+        top: 15px;
+        left: 15px;
         font-size: 18px;
         color: #fff;
-        display: block;
         font-weight: bold;
       }
       .right-text {
-        line-height: 60px;
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
         font-size: 48px;
         color: #fff;
-        display: block;
         text-align: right;
-        padding-right: 10px;
       }
       .iconfont{
-        position:absolute;
-        top: -16px;
-        left: 25%;
         opacity: 0.2;
         color: #fff;
-      }
-      .iconfont.building{
-        font-size:120px;
-      }
-      .iconfont.idle{
-        font-size:130px;
       }
     }
     .top-item.building {
@@ -265,7 +257,7 @@
       background-color: #fff;
       display: grid;
     }
-    .flex-item span{
+    .count-item span{
       &:first-child {
         font-size: 13px;
       }
@@ -289,6 +281,10 @@
         border-right: 1px solid #efefef;
         line-height: 50px;
         text-align: center;
+        cursor: pointer;
+      }
+      .tab-item:hover {
+        color: #00b4cf;
       }
       .active {
         color: #00b4cf;
@@ -326,17 +322,15 @@
     padding: 8px 16px;
     background-color: #fff;
   }
-
   .list-wrap{
-    border:1px solid red;
     .list-item {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       background-color: #fff;
-      padding: 15px 12px 15px;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-end;
       position: relative;
+      padding: 15px 12px 15px;
       .list-img {
         margin-right: 25px;
         img {
@@ -355,10 +349,16 @@
           }
           .status-box{
             margin-right: 40px;
+            width: 70px;
             span {
               padding: 2px 8px;
-              background-color: rgb(255,154,42);
               color: #fff;
+            }
+            span.building {
+              background-color: rgb(255,154,42);
+            }
+            span.idle {
+              background-color: #7fbc39;
             }
           }           
           .ip-box{
@@ -386,10 +386,14 @@
             color: #fff;
             padding:1px 4px; 
             margin-top: 5px;
+            cursor: pointer;
             i{
               font-size: 12px;
               font-weight: bold;
             }
+          }
+          .add-btn:hover{
+            opacity: 0.8;
           }
           .browser-wrap{
             display: flex;
@@ -411,9 +415,6 @@
         
       }
       .list-btn{
-        position: absolute;
-        right: 18px;
-        bottom: 12px;
         padding: 6px 14px;
         background-color: #00b4cf;
         color: #fff;
@@ -423,7 +424,19 @@
           margin-right: 4px;
         }
       }
+      .list-btn:hover{
+        opacity: 0.8;
+      }
     }
   }
   
+  .popup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.6);
+    z-index: 10;
+  }
 </style>

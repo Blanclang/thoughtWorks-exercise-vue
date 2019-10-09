@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <!-- 头部组建 -->
-    <zt-header></zt-header>
+    <Header></Header>
     <div class="wrap">
       <!-- 导航 -->
-      <subNav></subNav>
+      <Nav></Nav>
       <div class="content">
         <router-view></router-view>
       </div>
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-  import ztHeader from './components/zt-header.vue';
-  import subNav from './components/zt-sub-nav';
+  import Header from './components/header';
+  import Nav from './components/nav';
 
   export default {
     data() {
@@ -29,13 +29,13 @@
       
     },
     methods:{
-      getSubNavOpen(){
+      getnavOpen(){
         this.sysframeOpen = !data;
       },
     },
     components:{
-      ztHeader,
-      subNav
+      Header,
+      Nav
     }
   }
 </script>
@@ -44,12 +44,16 @@
   @import "./assets/css/common.css";
   .container{
     width: 100%;
-    border:1px solid red;
     display:grid;
-    grid-auto-rows: 1fr min-content;
+    grid-auto-rows: 50px auto;
+    overflow: hidden;
     .wrap{
       margin: 0 auto;
       display: grid;
+      .content{
+        height: calc(100vh - 50px);
+        overflow: auto;
+      }
     }
   }
 
