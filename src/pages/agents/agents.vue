@@ -54,16 +54,16 @@
     <div class="list-wrap">
       <div class="list-item" :class="item.status?'building':'idle'" v-for="(item,index) in listTabData" :key="item.id">
         <div class="list-img">
-          <img :src="item.image" alt="">
+          <img :src="require(`@/assets/images/${item.os}.jpg`)" alt="">
         </div>
         <div class="list-data">
           <div class="list-top">
             <div class="network-box flex_lc">
               <i class="el-icon-monitor text-item"></i>
-              <span class="text-item network">{{item.url}}</span>
+              <span class="text-item network">{{item.name}}</span>
             </div>
             <div class="status-box">
-              <span v-if="item.status" class="text-item building">building</span>
+              <span v-if="item.status == 'building'" class="text-item building">building</span>
               <span v-else class="text-item idle">idle</span>
             </div>
             <div class="ip-box flex_lc">
@@ -72,7 +72,7 @@
             </div>
             <div class="file-box flex_lc">
               <i class="el-icon-folder text-item"></i>
-              <span class="text-item">{{item.file}}</span>
+              <span class="text-item">{{item.location}}</span>
             </div>
           </div>
           <div class="list-bottom">
@@ -80,13 +80,13 @@
               <i class="el-icon-plus"></i>
             </span>
             <div class="browser-wrap">
-              <span class="browser-tag" v-for="(itm,idx) in item.browser" :key="idx">
+              <span class="browser-tag" v-for="(itm,idx) in item.resources" :key="idx">
                 {{itm}}<i class="el-icon-delete-solid" @click="deleteBrowser(index,idx)"></i>
               </span>
             </div>
           </div>
         </div>
-        <div v-if="item.status" class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
+        <div v-if="item.status == 'building'" class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
       </div>
     </div>
     <!-- 手机模式导航弹出层 -->
@@ -112,8 +112,9 @@
 
 <script>
   import navPhone from '@/components/nav-phone';
+
   export default {
-    name: 'home',
+    name: 'agents',
     data() {
       return {
         tabData:[
@@ -169,13 +170,13 @@
       },
       //删除浏览器
       deleteBrowser(index,idx){
-        this.listTabData[index].browser.splice(idx,1);
+        this.listTabData[index].resources.splice(idx,1);
       },
       //添加浏览器
       submitBrowser(){
         if(this.browserText){
           let addArr = this.browserText.split(',');
-          this.listTabData[this.browserIdx].browser = this.listTabData[this.browserIdx].browser.concat(addArr);
+          this.listTabData[this.browserIdx].resources = this.listTabData[this.browserIdx].resources.concat(addArr);
           this.cancelBrowser();
         }
       },
@@ -192,8 +193,6 @@
 </script>
 
 <style scoped lang="scss">
-  .home {
-  }
   .top-wrap {
     display: grid;
     .top-item {

@@ -16,7 +16,7 @@ const devWebpackConfig = merge(baseWebpackConfig,{
     contentBase:false,
     host:'localhost',
     compress:true,
-    port:8030,
+    port:3001,
     open: true,
     overlay: true, // 开启错误调试,
     inline: true,

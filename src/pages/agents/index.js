@@ -4,5 +4,5 @@
 *  @创建时间：2019/10/5
 */
 
-import home from './home';
-export default home;
+import agents from './agents';
+export default agents;

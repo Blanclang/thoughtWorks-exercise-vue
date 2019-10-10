@@ -4,17 +4,17 @@ export let initRoutes = [
     path: '/',
     name: 'index',
     redirect: {
-      name: 'home'
+      name: 'agents'
     }
   },
   {
-    path: '/home',
-    name: 'home',
+    path: '/agents',
+    name: 'agents',
     component(resolve){
-      require(["../pages/home"],resolve);
+      require(["../pages/agents"],resolve);
     },
     meta: {
-      p: 'home',
+      p: 'agents',
       name: '首页'
     }
   },
