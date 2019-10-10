@@ -16,7 +16,7 @@
       <el-dropdown>
         <div class="el-dropdown-link">
           <img :src="userIcon" alt="">
-          <span style="color: #fff;font-size: 12px">
+          <span>
             <i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
         </div>
