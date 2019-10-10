@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config build/webpack.dev.config.js --dev",
-    "build.dev": "webpack --config build/webpack.prod.config.js --dev",
-    "build.test": "webpack --config build/webpack.prod.config.js --test",
-    "build.online": "webpack --config build/webpack.prod.config.js --online"
+    "dev": "webpack-dev-server --config build/webpack.dev.config.js",
+    "build": "webpack --config build/webpack.prod.config.js"
   },
   "author": "bai",
   "license": "ISC",
