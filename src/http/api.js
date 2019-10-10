@@ -7,9 +7,13 @@ import Http from "./http";
 
 export default {
   methods:{
-    // 获取首页接口
-    getHomeList(options) {
-      return Http.get('/home/list',options);
+    // 获取导航数据接口
+    getNavList(options) {
+      return Http.get('/nav/list',options);
+    },
+    // 获取首页列表接口
+    getHomeTabList(options) {
+      return Http.get('/home/tab/list',options);
     }
   }
 }

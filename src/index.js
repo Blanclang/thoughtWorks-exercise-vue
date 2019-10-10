@@ -9,8 +9,7 @@ import App from './App.vue';
 import apiMixins from './http/api';
 import {formatDate,Format} from "./utils";
 
-require('./utils/directive'); //引入自定义指令
-// require('./mock'); //引入mock数据
+require('./mock'); //引入mock数据
 
 //加载路由组件
 Vue.use(VueRouter);

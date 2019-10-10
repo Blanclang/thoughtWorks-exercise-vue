@@ -52,7 +52,7 @@
     </div>
     <!-- 列表 -->
     <div class="list-wrap">
-      <div class="list-item" :class="item.status?'building':'idle'" v-for="(item,index) in listData" :key="item.id">
+      <div class="list-item" :class="item.status?'building':'idle'" v-for="(item,index) in listTabData" :key="item.id">
         <div class="list-img">
           <img :src="item.image" alt="">
         </div>
@@ -131,80 +131,7 @@
           }
         ],
         currentTab:1,
-        listData: [
-          {
-            id:1,
-            status:0,
-            image:require('../../assets/images/list1.png'),
-            url:'www.bjstdmngbgr01.thoughtworks.com',
-            ip:'192.168.1.102',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          },
-          {
-            id:2,
-            status:1,
-            image:require('../../assets/images/list1.png'),
-            url:'www.bjstdmngbgr08.thoughtworks.com',
-            ip:'192.168.1.243',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          },
-          {
-            id:3,
-            status:1,
-            image:require('../../assets/images/list2.jpg'),
-            url:'www.bjstdmngbgr10.thoughtworks.com',
-            ip:'192.168.1.80',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari']
-          },
-          {
-            id:4,
-            status:1,
-            image:require('../../assets/images/list3.jpg'),
-            url:'www.bjstdmngbgr11.thoughtworks.com',
-            ip:'192.168.1.243',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          },
-          {
-            id:5,
-            status:0,
-            image:require('../../assets/images/list4.jpg'),
-            url:'www.bjstdmngbgr15.thoughtworks.com',
-            ip:'192.168.1.117',
-            file:'/var/lib/cruise-agent',
-            browser:[]
-          },
-          {
-            id:6,
-            status:1,
-            image:require('../../assets/images/list1.png'),
-            url:'www.bjstdmngbgr01.thoughtworks.com',
-            ip:'192.168.1.110',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          },
-          {
-            id:7,
-            status:0,
-            image:require('../../assets/images/list1.png'),
-            url:'www.bjstdmngbgr01.thoughtworks.com',
-            ip:'192.168.1.110',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          },
-          {
-            id:8,
-            status:0,
-            image:require('../../assets/images/list1.png'),
-            url:'www.bjstdmngbgr01.thoughtworks.com',
-            ip:'192.168.1.110',
-            file:'/var/lib/cruise-agent',
-            browser:['Firefox','Safari','Ubuntu','Chrome']
-          }
-        ],
+        listTabData: [],
         browserStatus:false,
         browserText:'',
         browserIdx:null
@@ -217,9 +144,20 @@
       }
     },
     created() {
-      
+      //获取tab列表接口
+      this.getHomeTabList();
     },
     methods: {
+      //获取tab列表接口
+      getHomeTabList(){
+        let requestPromise = this.$root.getHomeTabList();
+        requestPromise.then(res => {
+          console.log(res);
+          if(!res.code){
+            this.listTabData = res.data.list;
+          }
+        });
+      },
       //tab切换
       tabSelect(id){
         this.currentTab = id;
@@ -231,13 +169,13 @@
       },
       //删除浏览器
       deleteBrowser(index,idx){
-        this.listData[index].browser.splice(idx,1);
+        this.listTabData[index].browser.splice(idx,1);
       },
       //添加浏览器
       submitBrowser(){
         if(this.browserText){
           let addArr = this.browserText.split(',');
-          this.listData[this.browserIdx].browser = this.listData[this.browserIdx].browser.concat(addArr);
+          this.listTabData[this.browserIdx].browser = this.listTabData[this.browserIdx].browser.concat(addArr);
           this.cancelBrowser();
         }
       },

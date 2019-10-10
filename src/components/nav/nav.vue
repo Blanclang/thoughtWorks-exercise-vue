@@ -26,34 +26,12 @@
 </template>
 
 <script>
-
   export default {
     props:{
     },
     data() {
       return {
-				navData:[
-          {
-            id:1,
-            icon:'icongongyezujian-yibiaopan',
-            name:'DASHBOARD'
-          },
-          {
-            id:2,
-            icon:'iconzuzhi',
-            name:'AGENT'
-          },
-          {
-            id:3,
-            icon:'iconhuoche',
-            name:'MY CRUISE'
-          },
-          {
-            id:4,
-            icon:'iconhelpbuoy',
-            name:'HELP'
-          }
-        ],
+				navData:[],
         currentNav:1,
         historyDada:[
           'bjstdmngbgr02/Acceptance_test',
@@ -70,18 +48,24 @@
         ]
       };
     },
-    computed:{
-    },
-    mounted() {
+    created() {
+      //获取导航菜单数据接口
+      this.getNavData();
     },
     methods:{
+      //获取导航菜单数据接口
+      getNavData(){
+        let requestPromise = this.$root.getNavList();
+        requestPromise.then(res => {
+          if(!res.code){
+            this.navData = res.data.list;
+          }
+        });
+      },
       // 导航切换
       navSelect(id){
         this.currentNav = id;
       }
-    },
-    components:{
-
     }
   }
 </script>
