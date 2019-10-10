@@ -12,7 +12,6 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");// 压缩插件
 const ExtractTextPlugin = require("extract-text-webpack-plugin");// 分离CSS插件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");// 分离CSS插件
 
-const env = process.argv[4];
 const baseConfig = {
   entry:{
     app:path.resolve(__dirname,'./../src/index.js'),
@@ -109,8 +108,7 @@ const baseConfig = {
       allChunks: true
     }),
     new webpack.DefinePlugin({
-      baseURL:JSON.stringify("/v1"),
-      env:JSON.stringify(env)
+      baseURL:JSON.stringify("/v1")
     })
   ],
   resolve: {
