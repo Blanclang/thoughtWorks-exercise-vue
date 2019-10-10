@@ -1,9 +1,8 @@
 /*
 *  @描述：首页
 *  @作者：白朗
-*  @创建时间：2019/9/24
+*  @创建时间：2019/10/5
 */
-
 <template>
   <div class="home">
     <!--上部栏 -->
@@ -53,7 +52,7 @@
     </div>
     <!-- 列表 -->
     <div class="list-wrap">
-      <div class="list-item" :class="item.status?'building':'idle'" v-for="item in listData" :key="item.id">
+      <div class="list-item" :class="item.status?'building':'idle'" v-for="(item,index) in listData" :key="item.id">
         <div class="list-img">
           <img :src="item.image" alt="">
         </div>
@@ -77,12 +76,12 @@
             </div>
           </div>
           <div class="list-bottom">
-            <span class="add-btn">
+            <span class="add-btn" @click="addBrowser(index)" >
               <i class="el-icon-plus"></i>
             </span>
             <div class="browser-wrap">
-              <span class="browser-tag" v-for="(itm,index) in item.browser" :key="index">
-                {{itm}}<i class="el-icon-delete-solid"></i>
+              <span class="browser-tag" v-for="(itm,idx) in item.browser" :key="idx">
+                {{itm}}<i class="el-icon-delete-solid" @click="deleteBrowser(index,idx)"></i>
               </span>
             </div>
           </div>
@@ -90,9 +89,23 @@
         <div v-if="item.status" class="list-btn"><i class="el-icon-warning-outline"></i> Deny</div>
       </div>
     </div>
-    <!-- 手机模式弹出层 -->
-    <div v-if="navPopupPhone" class="popup">
-      <nav-phone v-on:closeCall="closeCall"></nav-phone>
+    <!-- 手机模式导航弹出层 -->
+    <div class="nav-popup" :class="getNavStatus?'show':'hide'">
+      <nav-phone></nav-phone>
+    </div>
+    <!--添加浏览器弹框-->
+    <div class="browser-popup flex_cc" :class="browserStatus?'show':'hide'">
+      <div class="browser-box">
+        <span class="close" @click="cancelBrowser">×</span>
+        <div class="browser-con">
+          <p class="directions">Separate multiple resource name with commas</p>
+          <input type="text" v-model="browserText" placeholder="Input value">
+        </div>
+        <div class="browser-footer flex_lc">
+          <div class="footer-btn sure" @click="submitBrowser">Add Resources</div>
+          <div class="footer-btn cancel" @click="cancelBrowser">Cancel</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -103,7 +116,6 @@
     name: 'home',
     data() {
       return {
-        navPopupPhone:true,
         tabData:[
           {
             id:1,
@@ -193,6 +205,15 @@
             browser:['Firefox','Safari','Ubuntu','Chrome']
           }
         ],
+        browserStatus:false,
+        browserText:'',
+        browserIdx:null
+      }
+    },
+    computed: {
+      //获取左边菜单栏显示隐藏状态
+      getNavStatus() {
+        return this.$store.getters.getNavStatus;
       }
     },
     created() {
@@ -203,11 +224,28 @@
       tabSelect(id){
         this.currentTab = id;
       },
-      closeCall(value){
-        console.log(value);
-        this.navPopupPhone = false;
+      //添加浏览器
+      addBrowser(index){
+        this.browserIdx = index;
+        this.browserStatus=true;
+      },
+      //删除浏览器
+      deleteBrowser(index,idx){
+        this.listData[index].browser.splice(idx,1);
+      },
+      //添加浏览器
+      submitBrowser(){
+        if(this.browserText){
+          let addArr = this.browserText.split(',');
+          this.listData[this.browserIdx].browser = this.listData[this.browserIdx].browser.concat(addArr);
+          this.cancelBrowser();
+        }
+      },
+      //浏览器
+      cancelBrowser(){
+        this.browserStatus=false;
+        this.browserText = '';
       }
-      
     },
     components:{
       navPhone
@@ -330,11 +368,11 @@
       justify-content: flex-start;
       align-items: flex-end;
       position: relative;
-      padding: 15px 12px 15px;
+      padding: 20px 12px;
       .list-img {
         margin-right: 25px;
         img {
-          width: 60px;
+          width: 80px;
         }
       }
       .list-data {
@@ -407,12 +445,11 @@
               margin-left:6px; 
               i{
                 margin-left: 4px;
+                cursor: pointer;
               }
             }
           }
-          
         }
-        
       }
       .list-btn{
         padding: 6px 14px;
@@ -429,14 +466,88 @@
       }
     }
   }
-  
-  .popup{
+  /* 弹出层导航栏 */
+  .nav-popup{
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0px;
     left: 0px;
     background: rgba(0,0,0,0.6);
-    z-index: 10;
+    transition:opacity 0.4s,z-index 0.6s;
+  }
+  .nav-popup.show{
+    z-index: 5;
+    opacity: 1;
+  }
+  .nav-popup.hide{
+    z-index: -1;
+    opacity: 0;
+  }
+  /* 添加浏览器弹框 */
+  .browser-popup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.6);
+    transition:opacity 0.4s,z-index 0.6s;
+  }
+  .browser-box{
+    position: relative;
+    background-color: #fff;
+    width: 570px;
+    box-shadow:0 3 5px (#000,30%);
+    padding: 15px;
+    .close{
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      color: #00b4cf;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .browser-con{
+      padding-top:10px; 
+      input{
+        display: block;
+        margin-top: 10px;
+        padding:0 10px;
+        color: #00b4cf;
+        width: 100%;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+    .browser-footer{
+      margin-top: 20px;
+      .footer-btn{
+        text-align: center;
+        line-height: 30px;
+        height: 30px;
+        color: #f3f3f3;
+        cursor: pointer;
+      }
+      .footer-btn:hover{
+        opacity: 0.8;
+      }
+      .footer-btn.sure{
+        background-color: #00b4cf;
+      }
+      .footer-btn.cancel{
+        background-color: #435466;
+      }
+    }      
+  }
+  .browser-popup.show{
+    z-index: 4;
+    opacity: 1;
+  }
+  .browser-popup.hide{
+    z-index: -1;
+    opacity: 0;
   }
 </style>

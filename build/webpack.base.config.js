@@ -2,7 +2,7 @@
 /*
 *  @描述：项目构建基础配置
 *  @作者：白朗
-*  @创建时间：2019-03-20
+*  @创建时间：2019-10-04
 */
 const webpack = require("webpack");
 const path = require("path");
@@ -13,18 +13,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");// 分离CSS插
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");// 分离CSS插件
 
 const env = process.argv[4];
-const wxUrlObj = {
-  "--dev":"http://172.16.32.182:8994",
-  "--test":"http://172.16.32.181:8994",
-  "--online":"http://stsc.zhengtongauto.com"
-};
-const wxAgentObj = {
-  "--dev":"1000002",
-  "--test":"1000003",
-  "--online":"1000008"
-};
-let wxUrl = wxUrlObj[env];
-let wxAgentId = wxAgentObj[env];
 const baseConfig = {
   entry:{
     app:path.resolve(__dirname,'./../src/index.js'),
@@ -106,20 +94,6 @@ const baseConfig = {
         }],
         exclude:/node_modules/
       }
-      // {
-      //   test: /\.(sa|sc|c)ss$/,
-      //   use: [
-      //     {
-      //       loader: MiniCssExtractPlugin.loader,
-      //       options: {
-      //         publicPath: '../'
-      //       }
-      //     },
-      //     'css-loader',
-      //     'postcss-loader',
-      //     'sass-loader',
-      //   ],
-      // }
     ]
   },
   plugins:[
@@ -127,8 +101,7 @@ const baseConfig = {
       // hash:true, //为了开发中js有缓存效果，所以加入hash，这样可以有效避免缓存JS。
       template:path.resolve(__dirname,'./../src/template/index.html'), // 指定模板html文件
       filename:'index.html',
-      inject:'true',
-      favicon: path.resolve(__dirname,'./../favicon.ico')
+      inject:'true'
     }),
     new VueLoaderPlugin(),
     new ExtractTextPlugin({
@@ -137,8 +110,6 @@ const baseConfig = {
     }),
     new webpack.DefinePlugin({
       baseURL:JSON.stringify("/v1"),
-      wxUrl:JSON.stringify(wxUrl),
-      wxAgentId:JSON.stringify(wxAgentId),
       env:JSON.stringify(env)
     })
   ],

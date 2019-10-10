@@ -4,7 +4,7 @@
 *  @创建时间：2019/10/6
 */
 <template>
-  <div class="nav-warp__phone">
+  <div class="nav-warp__phone" :class="getNavStatus?'show':'hide'">
     <div class="nav">
       <div class="nav-content">
         <div class="close"><span @click="closePopup">×</span></div>
@@ -75,7 +75,11 @@
         ]
       };
     },
-    computed:{
+    computed: {
+      //获取左边菜单栏显示隐藏状态
+      getNavStatus() {
+        return this.$store.getters.getNavStatus;
+      }
     },
     mounted() {
     },
@@ -83,9 +87,11 @@
       // 导航切换
       navSelect(id){
         this.currentNav = id;
+        this.closePopup();
       },
+      //dispatch关闭导航状态
       closePopup(){
-        this.$emit('closeCall', false);
+        this.$store.dispatch('changeStatusNavPhone',false);
       }
     },
     components:{
@@ -97,7 +103,9 @@
 <style lang="scss" scoped>
   
   .nav-warp__phone{
-    width: 230px;
+    position: absolute;
+    top:0px;
+    width: 210px;
     height: 100%;
     background-color: #2d4054;
     .nav{
@@ -177,6 +185,14 @@
       
     }
     
+  }
+  .nav-warp__phone.show{
+    left: 0px;
+    transition:left 0.4s;
+  }
+  .nav-warp__phone.hide{
+    left:-210px;
+    transition:left 0.4s;
   }
 
   

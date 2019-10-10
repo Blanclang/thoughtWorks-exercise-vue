@@ -1,7 +1,7 @@
 /*
 *  @描述：自定义指令
-*  @作者：邱康松
-*  @创建时间：2019/1/29
+*  @作者：白朗
+*  @创建时间：2019/08/11
 */
 
 import Vue from 'vue';
@@ -39,9 +39,6 @@ let checkCode = function (code,list) {
 Vue.directive('has', {
   bind: function (el, binding, vnode) {
     if (!hasAuth(binding.value)) { //binding.value为指令传进来的按钮code
-     /* el.setAttribute('disabled','disabled');
-      el.setAttribute('title','你无使用权限');
-      el.classList.add('is-disabled'); //给按钮添加elementUI的禁用样式*/
       el.style.display = 'none';
     }
   }
@@ -68,7 +65,6 @@ Vue.directive('dialogDrag', {
   bind(el, binding, vnode, oldVnode) {
     const dialogHeaderEl = el.querySelector('.el-dialog__header');
     const dragDom = el.querySelector('.el-dialog');
-    //dialogHeaderEl.style.cursor = 'move';
     dialogHeaderEl.style.cssText += ';cursor:move;';
     dragDom.style.cssText += ';top:0px;';
 

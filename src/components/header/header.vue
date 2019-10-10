@@ -34,20 +34,16 @@
   import userIcon from "@/assets/images/head.jpg";
 
   export default {
-    components:{
-    },
     data() {
       return {
 				logo:ztLogo,
         userIcon,
       };
     },
-    created(){
-
-    },
     methods:{
+      //dispatch打开导航状态
       openNav(){
-
+        this.$store.dispatch('changeStatusNavPhone',true);
       }
     }
   }
@@ -89,7 +85,6 @@
       }
     }
     .person-wrap{
-      
       padding-right: 18px;
       p{
         margin: 0px 10px;
